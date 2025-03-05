@@ -81,52 +81,48 @@ OPENAI_API_KEY=your_openai_api_key
 
 ## 🎯 Usage
 
-### Starting the Server
+### Setting Up With Claude for Desktop
 
-Run the MCP server:
+Instead of running the server directly, you can configure Claude for Desktop to access the WebSearch tools:
 
-```bash
-python main.py
+1. Locate or create your Claude for Desktop configuration file:
+
+   - Windows: `%env:AppData%\Claude\claude_desktop_config.json`
+   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+2. Add the WebSearch server configuration to the `mcpServers` section:
+
+```json
+{
+  "mcpServers": {
+    "websearch": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "D:\\ABSOLUTE\\PATH\\TO\\WebSearch",
+        "run",
+        "main.py"
+      ]
+    }
+  }
+}
 ```
+
+3. Make sure to replace the directory path with the absolute path to your WebSearch project folder.
+
+4. Save the configuration file and restart Claude for Desktop.
+
+5. Once configured, the WebSearch tools will appear in the tools menu (hammer icon) in Claude for Desktop.
 
 ### Available Tools
 
 1. **Search**
 
-```python
-# Perform a web search
-await search(query="your search query")
-```
-
 2. **Extract Information**
-
-```python
-# Extract specific information from URLs
-await extract(
-    urls=["https://example.com"],
-    prompt="Extract main topics",
-    enableWebSearch=True,
-    showSources=True
-)
-```
 
 3. **Crawl Websites**
 
-```python
-# Crawl a website with specific parameters
-await crawl(
-    url="https://example.com",
-    maxDepth=2,
-    limit=10
-)
-```
-
 4. **Scrape Content**
-
-```python
-# Scrape content from a URL
-await scrape(url="https://example.com")
-```
 
 ## 📚 API Reference
 
@@ -196,18 +192,6 @@ FIRECRAWL_API_KEY=your_firecrawl_api_key_here
    - Navigate to your dashboard
    - Generate a new API key
 
-### Verifying Configuration
-
-To verify your configuration is working:
-
-```bash
-# Start the server
-python main.py
-
-# Try a simple search query
-curl -X POST http://localhost:3000/search -d '{"query": "test query"}'
-```
-
 If everything is configured correctly, you should receive a JSON response with search results.
 
 ### Troubleshooting
@@ -235,14 +219,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Firecrawl](https://docs.firecrawl.dev/) for their powerful web scraping API
 - [OpenAI](https://openai.com/) for AI capabilities
-- [Tavily](https://tavily.com/) for search functionality
-- The MCP community for the protocol specification
+- [MCP](https://modelcontextprotocol.io/introduction)The MCP community for the protocol specification
 
 ## 📬 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/websearch](https://github.com/yourusername/websearch)
+José Martín Rodriguez Mortaloni - [@m4s1t425](https://x.com/m4s1t425) - jmrodriguezm13@gmail.com
 
 ---
 
